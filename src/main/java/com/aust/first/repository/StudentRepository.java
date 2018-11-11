@@ -1,0 +1,45 @@
+package com.aust.first.repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import com.aust.first.entity.Student;
+
+public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpecificationExecutor<Student>{
+	
+	@Query(value="SELECT * FROM `student` s WHERE s.sname= :sname",nativeQuery = true)
+	Student selectBySname(@Param("sname")  String sname);
+	
+	List<Student> findBySnameLike(String sname);
+	
+	@Query(value="SELECT * FROM `student` WHERE student.sname LIKE %?1%",nativeQuery=true)
+	List<Student> sLikeSname1(String sname);
+	
+	Page<Student> findBySex(String sex,Pageable pageable);
+	
+	List<Student> findBySex(String sex);
+	
+	void deleteBySname(String sname);
+	
+	void deleteBySnameAndSex(String sname,String sex);
+	
+	void deleteBySnameAndSexAndSid(String sname,String sex,Long sid);
+	
+	Page<Student> findBySnameAndAgeAfter(String sname,Integer age,Pageable pageable);
+	
+	List<Student> findByBirthdayBefore(LocalDateTime yearAgo);
+	
+	Page<Student> findBySnameLike(String sname,Pageable pageable);
+
+	@Query(value="SELECT * FROM `student` WHERE sex=?1",nativeQuery=true)
+	List<Student> findSex(String sex);
+
+	Student findBySid(Long sid);
+	
+}

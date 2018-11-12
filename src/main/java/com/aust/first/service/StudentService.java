@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 
 import com.aust.first.entity.Student;
+import com.aust.first.vo.StuVo;
 
 public interface StudentService {
 

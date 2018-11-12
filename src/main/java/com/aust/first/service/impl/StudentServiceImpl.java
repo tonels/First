@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aust.first.entity.Student;
 import com.aust.first.repository.StudentRepository;
 import com.aust.first.service.StudentService;
+import com.aust.first.vo.StuVo;
 
 @Service
 @Transactional
@@ -77,6 +78,5 @@ public class StudentServiceImpl implements StudentService {
 		Pageable pageable = PageRequest.of(0,20,Direction.ASC,"age");
 		return studentRepository.findBySnameLike(sname,pageable);
 	}
-	
 	
 }

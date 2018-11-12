@@ -1,11 +1,13 @@
 package com.aust.first.controller;
 
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 import javax.websocket.server.PathParam;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.aust.first.entity.Student;
 import com.aust.first.repository.StudentRepository;
 import com.aust.first.service.StudentService;
@@ -162,8 +165,8 @@ public class StudentController {
 		String string = re.opsForValue().get(String.valueOf(sid));
 			 System.out.println("ds");
 			if (StringUtils.isNotBlank(string)) {
-				// Student student = JsonUtils.jsonToPojo(json, Student.class);
-				return ResultBeanUtil.ok(string);
+			 Student student = JsonUtils.jsonToPojo(string, Student.class);
+				return ResultBeanUtil.ok(student);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,7 +178,6 @@ public class StudentController {
 			System.out.println("转换成JSON后"+JsonUtils.objectToJson(stu));
 		//把结果添加到缓存
 		try {
-			//redisTemplate.opsForHash().put(sid,stu);
 			re.opsForValue().set(sid+"",JsonUtils.objectToJson(stu));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -207,6 +209,7 @@ public class StudentController {
 			//把结果添加到缓存
 			try {
 				re.opsForHash().put("STUDENT",sid+"",JsonUtils.objectToJson(stu));
+				re.expire("STUDENT",1000*3000,TimeUnit.SECONDS);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -214,8 +217,99 @@ public class StudentController {
 			return ResultBeanUtil.ok(stu);
 		}
 	
-	
-	
+		//添加缓存fastJson,测试实体存取
+				@GetMapping("/fastJson/{sid}")
+				ResultBeanUtil findsIdFast(@PathVariable Long sid){
+					//先查询缓存，
+					//添加缓存不能影响正常业务逻辑
+					try {
+						//查询缓存
+						//查到结果，把json转换成pojo
+					 String stuString = (String) re.opsForHash().get("STUDENT", sid+"");
+						if (StringUtils.isNotBlank(stuString)) {
+							Student student = JSON.parseObject(stuString,Student.class);
+							return ResultBeanUtil.ok(student);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//缓存没有命中，需要查询数据库
+					//设置查询条件
+					//执行查询
+						Student stu = studentRepository.findBySid(sid);
+					//把结果添加到缓存
+					try {
+						re.opsForHash().put("STUDENT",sid+"",JSON.toJSONString(stu));
+						re.expire("STUDENT",1000*3000,TimeUnit.SECONDS);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//返回结果
+					return ResultBeanUtil.ok(stu);
+				}
+				
+				//添加缓存，jsonUtils,测试集合类型存取
+				@GetMapping("/jsonUtil")
+				ResultBeanUtil findsAll(){
+					//先查询缓存，
+					//添加缓存不能影响正常业务逻辑
+					try {
+						//查询缓存
+						//查到结果，把json转换成pojo
+					 String listString = re.opsForList().leftPop("StudentList");
+						if (StringUtils.isNotBlank(listString)) {
+						List<Student> list = JsonUtils.jsonToList(listString, Student.class);
+							return ResultBeanUtil.ok(list);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//缓存没有命中，需要查询数据库
+					//设置查询条件
+					//执行查询
+						List<Student> list = studentRepository.findAll();
+					//把结果添加到缓存
+					try {
+						re.opsForList().leftPush("StudentList", JsonUtils.objectToJson(list));
+						re.expire("StudentList",1000*3000,TimeUnit.SECONDS);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//返回结果
+					return ResultBeanUtil.ok(list);
+				}
+				
+				//添加缓存，fastJson,测试集合类型存取
+				@GetMapping("/fastjson")
+				ResultBeanUtil findsAllfast(){
+					//先查询缓存，
+					//添加缓存不能影响正常业务逻辑
+					try {
+						//查询缓存
+						//查到结果，把json转换成pojo
+					 String listString = re.opsForList().leftPop("StudentList");
+						if (StringUtils.isNotBlank(listString)) {
+						List<Student> list = JsonUtils.jsonToList(listString, Student.class);
+							return ResultBeanUtil.ok(list);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//缓存没有命中，需要查询数据库
+					//设置查询条件
+					//执行查询
+						List<Student> list = studentRepository.findAll();
+					//把结果添加到缓存
+					try {
+						re.opsForList().leftPush("StudentList", JsonUtils.objectToJson(list));
+						re.expire("StudentList",1000*3000,TimeUnit.SECONDS);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//返回结果
+					return ResultBeanUtil.ok(list);
+				}
+				
 	
 	@GetMapping("/setjson")
 	public void test1(){

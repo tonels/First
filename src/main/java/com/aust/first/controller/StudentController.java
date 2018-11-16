@@ -124,7 +124,6 @@ public class StudentController {
 	
 	@GetMapping("/dsnameandsexsid")
 	ResultBeanUtil dnases(@RequestParam String sname,@RequestParam String sex,@RequestParam Long sid){
-		
 		studentService.resnsesi(sname,sex,sid);
 		return ResultBeanUtil.ok(sname+"删除成功：");
 	}

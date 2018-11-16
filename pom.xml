@@ -38,6 +38,12 @@
 	</properties>
 	
 <dependencies>
+			<dependency>
+			    <groupId>com.github.magese</groupId>
+			    <artifactId>ik-analyzer-solr7</artifactId>
+			    <version>7.x</version>
+			</dependency>
+
 		<!-- 持久层操作 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

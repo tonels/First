@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
@@ -11,8 +12,11 @@ import javax.websocket.server.PathParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,18 +50,24 @@ public class StudentController {
 	@Autowired
 	private RedisTemplate<String, String> re;
 	
+	@Autowired
+	private KafkaTemplate<String, String> kafkaTemplate;
+	
+	//添加
 	@PostMapping("/add")
 	public List<Student> save(@RequestBody Student student){
 		student.setBirthday(LocalDateTime.now());
 		 return studentService.add(student);
 	}
 	
+	//getOne,查一个
 	@GetMapping("/select")
 	public String selectById(@PathParam(value="id")Long id){
 		Student s1 = studentService.selectById(id);
 		return "success" + s1.getSname();
 	}
 	
+	//通过sname查询
 	@GetMapping("/sbysname")
 	public String selectBySname(@PathParam(value="sname")String sname){
 		Student s1 = studentService.selectBySname(sname);
@@ -98,12 +108,14 @@ public class StudentController {
 		return ResultBeanUtil.ok("总共多少条："+list.size());
 	}
 	
+	//根据姓名删除
 	@GetMapping("/dsname")
 	ResultBeanUtil dsname(@RequestParam(value="sname")String sname){
 		studentService.rsname(sname);
 		return ResultBeanUtil.ok("删除成功欧：");
 	}
 	
+	//根据姓名和性别删除
 	@GetMapping("/dsnameandsex")
 	ResultBeanUtil dsnaex(@RequestParam(value="sname")String sname,@RequestParam(value="sex")String sex){
 		studentService.namesex(sname,sex);
@@ -117,6 +129,7 @@ public class StudentController {
 		return ResultBeanUtil.ok(sname+"删除成功：");
 	}
 	
+	//Ids,多个id,逗号分隔，批量删除
 	@GetMapping("/pl")
 	ResultBeanUtil repl(@RequestParam String sname,@RequestParam String sex,@RequestParam(required=false)String sids){
 		if (StringUtil.isNullStr(sids)) {
@@ -124,15 +137,16 @@ public class StudentController {
 		}
 		studentService.repl(sname, sex, sids);
 		return ResultBeanUtil.ok(sids+"删除成功：");	
-		
 	}
 	
+	//姓名年龄，分页显示
 	@GetMapping("/gt")
 	ResultBeanUtil getgtage(@RequestParam String sname,@RequestParam Integer age){
 			Page<Student> result = studentService.ageSname(sname,age);
 			return ResultBeanUtil.ok(result.getContent(),result.getTotalPages(),result.getTotalElements());
 	}
 	
+	//判断年龄，查询显示
 	@GetMapping("/year")
 	public List<Student> year(){
 		LocalDateTime yearAgo = LocalDateTime.now().minusYears(1);
@@ -329,6 +343,62 @@ public class StudentController {
 		Student s = (Student) this.redisTemplate.opsForValue().get("userjson");
 		return s;
 		}
+	
+	@GetMapping("/{sid}")
+	String selectId(@PathVariable Long sid){
+		Student s = studentRepository.findBySid(sid);
+		return s.getSname()+".....成功返回";
+	}
+	
+	@GetMapping("/dayu1/{sid}")
+	List<Student> sidgt(@PathVariable Long sid){
+		return studentRepository.findBySidGreaterThan(sid);
+	}
+	
+	@GetMapping("/dayu2")
+	List<Student> sidgt2(Long sid){
+		return studentRepository.findBySidGreaterThan(sid);
+	}
+	
+	@GetMapping("/dayu3/{sid}")
+	List<Student> sidgt3(@PathVariable Long sid){
+		Pageable pageable = PageRequest.of(0,3);
+		return studentRepository.findBySidGreaterThan(sid,pageable);
+	}
+	
+	@GetMapping("/s20/{sid}")
+	Long count(@PathVariable Long sid){
+		return studentRepository.count(sid);
+	}
+	
+	@GetMapping("/s21/{sname}")
+	List<Student> s21(@PathVariable String sname){
+		return studentRepository.findBySnameNotLike(sname+"%");
+	}
+		
+	@GetMapping("/s22/{sname}")
+	List<Student> s22(@PathVariable String sname){
+		return studentRepository.findBySnameNot(sname);
+	}
+	
+	//Id,查询一个，Kafka,发送消息，监听处给与回应
+	@GetMapping("/kafka")
+	ResultBeanUtil findOne(Long id){
+		Optional<Student> stu = studentRepository.findById(id);
+		//System.out.println(stu.toString()+"ls");
+		if (StringUtils.isBlank(stu.toString())) {
+			return ResultBeanUtil.ok("抱歉，没查到匹配该条件的信息");
+		}else{
+			/*kafkaTemplate.send("t3", String.valueOf(id));
+			System.out.println("消息已经发出去了 [" + id + "]");
+			return ResultBeanUtil.ok(stu);*/
+			kafkaTemplate.send("t3", "123456");
+			System.out.println("消息已经发出去了123456 [" );
+			return ResultBeanUtil.ok(stu);
+		}
+	}
+	
+	
 	
 	
 	

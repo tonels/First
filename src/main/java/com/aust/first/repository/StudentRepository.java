@@ -2,6 +2,7 @@ package com.aust.first.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +40,22 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 
 	@Query(value="SELECT * FROM `student` WHERE sex=?1",nativeQuery=true)
 	List<Student> findSex(String sex);
-
+	
 	Student findBySid(Long sid);
+	
+	List<Student> findBySidGreaterThan(Long sid);//sid > ?
+	
+	List<Student> findBySidGreaterThan(Long sid,Pageable pageable);//sid > ?,page,只显示第一页
+	
+	@Query("select count(s) from Student s where s.sid > ?1")
+	Long count(Long sid);//s20
+	
+	List<Student> findBySnameNotLike(String sname);//s21
+	
+	List<Student> findBySnameNot(String sname);//s21
+	
+	
+	
+	List<Student> findByIdIn(String ids);
 	
 }

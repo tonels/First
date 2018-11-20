@@ -48,7 +48,7 @@ public class SimpleExample {
 	    log.info("------- 开始调度----------");
 
 	    // 等待
-	    log.info("----   等待65秒  -----");
+	    log.info("----   等待10秒  -----");
 	    try {
 	      Thread.sleep(10L * 1000L);
 	    } catch (Exception e) {

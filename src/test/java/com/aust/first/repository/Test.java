@@ -28,10 +28,10 @@ public class Test {
 	/*@Autowired
 	private UserRepository userdao;*/
 	
-	/*批量添加20个学生*/
+	/*批量添加100个学生*/
 	@org.junit.Test
 	public void testStudent() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 100; i++) {
 			Student s = new Student();
 			s.setSname(SimpleName.main(null));
 			s.setAge((int)(Math.random()*55+5));

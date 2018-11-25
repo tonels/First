@@ -54,8 +54,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 	
 	List<Student> findBySnameNot(String sname);//s21
 	
-	
-	
 	List<Student> findByIdIn(String ids);
+	
+	List<Student> findByAgeGreaterThan(Integer age);
 	
 }

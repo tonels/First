@@ -22,4 +22,7 @@ public interface StudentService {
 		void repl(String sname, String sex, String sids);
 		Page<Student> ageSname(String sname, Integer age);
 		Page<Student> getzhang(String sname);
+		List<Student> selectStuByAge(Integer age);
+		Student selectBysid(Long sid);
+		Student save(Student student);
 }

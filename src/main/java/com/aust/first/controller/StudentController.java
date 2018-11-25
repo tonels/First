@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import javax.websocket.server.PathParam;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -397,6 +398,25 @@ public class StudentController {
 		}
 	}
 	
+	@GetMapping("/agegt")
+	ResultBeanUtil getStuByage(Integer age){
+		List<Student> list = studentService.selectStuByAge(age);
+		return ResultBeanUtil.ok(list);
+	}
+	
+	//根据ID修改
+	@GetMapping("/up1")
+	ResultBeanUtil up1(Long sid){
+		Student student = studentService.selectBysid(sid);
+		if (StringUtil.isNullStr(student)) {
+			return ResultBeanUtil.error(CodeEnum.CUSTON_ERROR,"确定信息填对了吗？未匹配到此条记录的数据……");
+		}else{
+			student.setSex("男");
+			studentService.save(student);
+			return ResultBeanUtil.ok(student);
+		}
+		
+	}
 	
 	
 	

@@ -79,4 +79,21 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.findBySnameLike(sname,pageable);
 	}
 	
+	@Override
+	public List<Student> selectStuByAge(Integer age) {
+		return studentRepository.findByAgeGreaterThan(age);
+	}
+	
+	@Override
+	public Student selectBysid(Long sid) {
+		return studentRepository.findBySid(sid);
+	}
+	
+	//根据Sid修改
+	@Override
+	public Student save(Student student) {
+		 Student student2 = studentRepository.save(student);
+		 return student2;
+	}
+	
 }

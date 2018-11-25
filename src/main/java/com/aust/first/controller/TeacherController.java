@@ -33,8 +33,8 @@ import com.aust.first.util.ResultBeanUtil;
 			List<Teacher> list = teacherRepository.findAll();
 			list.forEach((as)->System.out.println(as));
 			return ResultBeanUtil.ok(list);
-			
 		}
+		
 		
 
 		

@@ -33,7 +33,7 @@ public class Test {
 	public void testStudent() {
 		for (int i = 0; i < 100; i++) {
 			Student s = new Student();
-			s.setSname(SimpleName.main(null));
+			s.setSname(SimpleName.getName());
 			s.setAge((int)(Math.random()*55+5));
 			if (i%2 == 0) {
 				s.setSex("男");

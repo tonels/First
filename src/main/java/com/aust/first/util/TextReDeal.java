@@ -5,12 +5,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-//txt文本处理模板，按行读取，处理输出换行
+//txt 文本处理模板，按行读取，处理输出换行
 public class TextReDeal {
 
-	public TextReDeal(){  }
+	private TextReDeal(){  }
 	
-	public void reTextByFileReaderLine(String inputFilePath) {
+	public static void reTextByFileReaderLine(String inputFilePath) {
 			FileWriter fw = null;
 			FileReader fr = null;
 			BufferedReader bf = null;
@@ -26,7 +26,7 @@ public class TextReDeal {
 				 
 				while((lineTxt = bf.readLine()) != null){
 					fw.write(lineTxt+"\r\n");
-					System.out.println(lineTxt);
+					System.out.println(new String(lineTxt.getBytes("utf-8")));
 				}
 	 
 			} catch (IOException e) {

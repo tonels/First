@@ -1,4 +1,4 @@
-package com.aust.first.kafka;
+/*package com.aust.first.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.producer.ProducerRecord;
@@ -33,7 +33,7 @@ public class SampleKafka2 {
 	private RedisTemplate<String,String> redisTemplate;
 	
 	
-	/*话题一*/
+	话题一
 	@KafkaListener(id = "t5", topics = "one") 
 	public void listenT1(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value()); 
@@ -43,7 +43,7 @@ public class SampleKafka2 {
 		redisTemplate.opsForValue().set("sid", sid);
 		} 
 	
-	/*话题二*/
+	话题二
 	@KafkaListener(id = "t6", topics = "two") 
 	public void listenT2(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value()); 
@@ -91,3 +91,4 @@ public class SampleKafka2 {
 		
 		
 }
+*/

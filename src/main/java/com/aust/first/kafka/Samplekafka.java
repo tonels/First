@@ -1,4 +1,4 @@
-package com.aust.first.kafka;
+/*package com.aust.first.kafka;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,7 +35,7 @@ public class Samplekafka {
 	@Autowired
 	private StudentRepository stuRepository;
 	
-	/*话题一*/
+	话题一
 	@KafkaListener(id = "t1", topics = "here") 
 	public void listenT1(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value()); 
@@ -51,14 +51,14 @@ public class Samplekafka {
 		System.out.println("cr.value()"+cr.value());
 		} 
 	
-	/*话题二*/
+	话题二
 	@KafkaListener(id = "t2", topics = "there") 
 	public void listenT2(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value());
 		logger.info("there is logging.....",cr.getClass()+ "/l/n"+cr.topic());
 		}
 	
-	/*话题三*/
+	话题三
 	@KafkaListener(id="t3",topics="student")
 	public void listenT3(ConsumerRecord<?, ?> cr,String id) throws Exception{
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value());
@@ -99,7 +99,7 @@ public class Samplekafka {
 		map.put("key",key);
 		map.put("data",data);
 		
-		/*以下是Map的集中遍历方式*/
+		以下是Map的集中遍历方式
 		//i = 1，方法1时.先遍历key,取出对应的V
 		switch(i){
 		case 1:
@@ -157,3 +157,4 @@ public class Samplekafka {
 	
 	
 
+*/

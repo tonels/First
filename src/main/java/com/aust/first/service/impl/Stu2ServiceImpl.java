@@ -1,6 +1,7 @@
 package com.aust.first.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +66,9 @@ public class Stu2ServiceImpl implements Stu2Service {
 	//fingAll,返回lsit,会默认根据ID升序输出
 	@Override
 	public List<Stu2> getAll() {
-		return stu2Repository.findAll();
+		List<Stu2> list = stu2Repository.findAll();
+		System.out.println(list);
+		return list;
 	}
 	//fingAll,分页排序输出，自定义排序字段，条件
 	@Override
@@ -95,7 +98,30 @@ public class Stu2ServiceImpl implements Stu2Service {
 
 	@Override
 	public List<Stu2> findByName(String name) {
-		return stu2Repository.findOneByName(name);
+		List<Stu2> findByName = stu2Repository.findByName(name);
+		return findByName;
+	}
+
+	@Override
+	public List<Stu2> findByAndSort(String name) {
+		return stu2Repository.findByAndSort(name, Sort.by(Direction.ASC, "admissionTime"));
+	}
+
+	@Override
+	public List<Stu2> getNameLike(String name) {
+		return stu2Repository.findByNameLike(name);
+	}
+
+	@Override
+	public List<Stu2> findByName3(String name) {
+		return stu2Repository.findByNameOrderByAgeDesc(name);
+	}
+
+	@Override
+	public List<String> findListGroupByHobby1() {
+//		List<String> list = new ArrayList<String>();
+		List<String> list2 = stu2Repository.findListGrouphobby1();
+		return list2;
 	}
 
 }

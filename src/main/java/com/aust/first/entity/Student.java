@@ -29,7 +29,8 @@ public class Student implements Serializable {
 	/*姓名*/
 	private String sname;
 	
-	/*学号
+	/*
+	 * 学号
 	 * 从1000-2000
 	 * */
 	private long sid;

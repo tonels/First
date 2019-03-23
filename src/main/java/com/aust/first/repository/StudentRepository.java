@@ -2,7 +2,6 @@ package com.aust.first.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import com.aust.first.entity.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpecificationExecutor<Student>{
@@ -57,5 +57,14 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 	List<Student> findByIdIn(String ids);
 	
 	List<Student> findByAgeGreaterThan(Integer age);
+	
+	/*暂时未调通，
+	直接使用NativeQuery等方式实现复杂查询个人比较喜欢，直观且便利，弊端在于无法
+	返回自定义实体类。需要手动封装工具类来实现Object到目标对象的反射。
+	*/
+	@Query(value="SELECT student.sid , student.sname , a.grade FROM student "
+			+ "LEFT JOIN(SELECT student.sid, SUM(score.grade) grade FROM student "
+			+ "LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a ON student.sid = a.sid",nativeQuery=true)
+	List<Object[]> findSnameAndtotal();
 	
 }

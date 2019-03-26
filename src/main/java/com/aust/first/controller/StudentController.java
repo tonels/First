@@ -70,7 +70,7 @@ public class StudentController {
 		return ResultBean.ok(studentService.lianbiao4());
 	}
 
-	// getOne,查一个
+	// 查询所有all，并输出到excel表中
 	@GetMapping("/all")
 	public List<Student> all() {
 		List<Student> list = studentService.findAll();
@@ -83,7 +83,7 @@ public class StudentController {
 		HSSFWorkbook wb = new HSSFWorkbook();
 		// 创建工作
 		HSSFSheet sheet = wb.createSheet();
-		// 设定sheet名称即第0个sheet名称为第一窗栏
+		// 设定sheetsd名称即第0个sheet名称为第一窗栏
 		wb.setSheetName(sheetNum, "第一窗栏");
 		HSSFCellStyle cellStyle = wb.createCellStyle();
 		String[] headers = new String[] { "序号", "姓名", "学号", "性别", "年龄" };

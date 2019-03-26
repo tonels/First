@@ -36,7 +36,7 @@ public class TaskController {
 	
 	}*/
 	
-	@Scheduled(fixedDelay=3000)
+	@Scheduled(fixedDelay=3000000)
 	void f2(){
 		System.out.println("开始调用时间" + LocalDateTime.now());
 		try {
@@ -45,7 +45,6 @@ public class TaskController {
 			e.printStackTrace();
 		}
 		System.out.println("调用完成时间  = " + LocalDateTime.now());
-	
 	}
 	
 }

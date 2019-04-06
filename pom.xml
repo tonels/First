@@ -13,7 +13,7 @@
 	<description>Demo project for Spring Boot</description>
 
 	<repositories>
-		<repository>
+		<!-- <repository>
 			<id>local_repo</id>
 			<url>http://172.16.15.21:18081/nexus/content/repositories/chyxRepo/</url>
 			<snapshots>
@@ -22,7 +22,7 @@
 			<releases>
 				<updatePolicy>never</updatePolicy>
 			</releases>
-		</repository>
+		</repository> -->
 	</repositories>
 
 	<parent>
@@ -157,7 +157,7 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.8</version>
 		</dependency>
-
+		
 
 	</dependencies>
 	<build>

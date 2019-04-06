@@ -76,17 +76,18 @@ public class StudentController {
 		List<Student> list = studentService.findAll();
 
 		// 3.解析list到excel中
-		int rowNum = 1;
-		int sheetNum = 0;
+
+		int rowNum = 1;// 默认第一行
+		int sheetNum = 0;// 默认第一窗栏
 		FileOutputStream fos = null;
-		// 创建工作
+		// 创建 HSSFWorkbook 工作簿对象
 		HSSFWorkbook wb = new HSSFWorkbook();
 		// 创建工作
 		HSSFSheet sheet = wb.createSheet();
 		// 设定sheetsd名称即第0个sheet名称为第一窗栏
 		wb.setSheetName(sheetNum, "第一窗栏");
 		HSSFCellStyle cellStyle = wb.createCellStyle();
-		String[] headers = new String[] { "序号", "姓名", "学号", "性别", "年龄" };
+		String[] headers = new String[] { "序号", "姓名", "学号", "性别", "年龄" };// 设置表头字段
 		ExcelUtil_1.setLineValue(sheet, 0, 0, cellStyle, headers);
 		List<String> values = new ArrayList<>();
 
@@ -101,7 +102,7 @@ public class StudentController {
 			ExcelUtil_1.setLineValue(sheet, rowNum, 0, null, values);
 			values.clear();
 			rowNum++;
-			if (rowNum % 100 == 0) { // 定义每个窗栏的行数
+			if (rowNum % 100 == 0) { // 定义每个窗栏的行数，用于切换窗栏
 				sheetNum++;
 				rowNum = 1;
 				sheet = wb.createSheet();

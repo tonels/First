@@ -33,51 +33,6 @@ public class StudentServiceImpl implements StudentService {
 	private EntityManager entityManager;
 
 	@Override
-	public List<Student> add(Student student) {
-		List<Student> list = new ArrayList<Student>();
-		for (int i = 0; i < 20; i++) {
-			list.add(studentRepository.save(student));
-		}
-		return list;
-	}
-
-	@Override
-	public Student selectById(Long id) {
-		return studentRepository.getOne(id);
-	}
-
-	@Override
-	public Student selectBySname(String sname) {
-		return studentRepository.selectBySname(sname);
-	}
-
-	@Override
-	public Page<Student> getPageSex(String sex, Integer start, Integer limit) {
-		PageRequest pageable = PageRequest.of(start, limit, Direction.DESC, "id");
-		return studentRepository.findBySex(sex, pageable);
-	}
-
-	@Override
-	public List<Student> getListSex(String sex) {
-		return studentRepository.findBySex(sex);
-	}
-
-	@Override
-	public void rsname(String sname) {
-		studentRepository.deleteBySname(sname);
-	}
-
-	@Override
-	public void namesex(String sname, String sex) {
-		studentRepository.deleteBySnameAndSex(sname, sex);
-	}
-
-	@Override
-	public void resnsesi(String sname, String sex, Long sid) {
-		studentRepository.deleteBySnameAndSexAndSid(sname, sex, sid);
-	}
-
-	@Override
 	public void repl(String sname, String sex, String sids) {
 
 		String[] sidsa = sids.split(",");
@@ -150,6 +105,11 @@ public class StudentServiceImpl implements StudentService {
 		}
 		return dtoList;
 	}
+	
+	@Override
+	public List<StudentDTO> lianbiao2_1() {
+		return null;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -171,5 +131,7 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> findAll() {
 		return studentRepository.findAll();
 	}
+
+	
 
 }

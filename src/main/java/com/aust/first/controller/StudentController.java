@@ -57,6 +57,14 @@ public class StudentController {
 		System.out.println(list);
 		return ResultBean.ok(list);
 	}
+	
+//	使用sql并返回自定义实体类DTO,并将结果封装成pojo
+	@GetMapping("/lianbiao2_1")
+	public ResultBean lianbiao2_1() {
+		List<StudentDTO> list = studentService.lianbiao2_1();
+		System.out.println(list);
+		return ResultBean.ok(list);
+	}
 
 //	使用sql并返回自定义实体类VO，没有封装pojo
 	@GetMapping("/lianbiao3")

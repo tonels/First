@@ -45,3 +45,8 @@ spring:
             auto-commit-interval: 100
             enable-auto-commit: true
             key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    data:
+        solr:
+            host: http://118.25.104.54:8983/solr/techproducts
+         
+          

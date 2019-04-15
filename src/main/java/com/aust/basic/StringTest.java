@@ -1,5 +1,7 @@
 package com.aust.basic;
 
+import com.aust.first.util.ChineseName;
+
 class Stud {
 
 	String name;
@@ -14,12 +16,9 @@ class Stud {
 }
 
  public class StringTest{
-	    
 	public static void main(String[] args) {
-		Stud s = new Stud();
-		s.study();
+
+		System.out.println(ChineseName.getName());
 	}
-	
-	
 	
 }

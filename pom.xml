@@ -157,7 +157,11 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.8</version>
 		</dependency>
-		
+		<!-- 引入 Solr -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-solr</artifactId>
+		</dependency>
 
 	</dependencies>
 	<build>

@@ -10,23 +10,7 @@ import com.aust.first.vo.StudentVo;
 
 public interface StudentService {
 
-	List<Student> add(Student student);
-
-	Student selectById(Long id);
-
-	Student selectBySname(String sname);
-
-	Page<Student> getPageSex(String sex, Integer start, Integer limit);
-
-	List<Student> getListSex(String sex);
-
-	void rsname(String sname);
-
-	void namesex(String sname, String sex);
-
-	void resnsesi(String sname, String sex, Long sid);
-
-	void repl(String sname, String sex, String sids);
+	void repl(String sname, String sex, String sids); // 批量删除
 
 	Page<Student> ageSname(String sname, Integer age);
 
@@ -41,7 +25,9 @@ public interface StudentService {
 	List<Object[]> lianbiao1();
 
 	List<StudentDTO> lianbiao2();
-
+	
+	List<StudentDTO> lianbiao2_1();
+	
 	List<StudentVo> lianbiao3();
 
 	List<Student> lianbiao4();

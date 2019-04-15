@@ -67,4 +67,8 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 			+ "LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a ON student.sid = a.sid",nativeQuery=true)
 	List<Object[]> findSnameAndtotal();
 	
+//	@Query(value="select sd from StudentDTO sd from Studnet LEFT JOIN(SELECT Studnet.sid,SUM(sr.grade) "
+//			+ "grade FROM Studnet LEFT JOIN Score sr ON Studnet.sid = sr.sid GROUP BY Studnet.sid) a ON Studnet.sid = a.sid")
+//	List<StudentDTO> findAllee();  // 还没调通
+	
 }

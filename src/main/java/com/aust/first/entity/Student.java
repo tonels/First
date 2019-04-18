@@ -4,10 +4,13 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -17,6 +20,17 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Entity
 @Table(name="student")
+@SqlResultSetMapping( //lianbiao3_2没调出来
+		    		name="CustomerVoResult",
+		    		classes = {
+		    			@ConstructorResult(
+		    				targetClass=com.aust.first.vo.StudentVo2.class,
+		    				columns={
+		    					@ColumnResult(name="sname"),
+		    					@ColumnResult(name="grade",type=Double.class),
+		    			    }
+		    		    )
+		    		})
 public class Student implements Serializable {
 	/**
 	 * 学生表

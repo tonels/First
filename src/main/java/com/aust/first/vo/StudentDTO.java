@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+
+/**
+ * @author ls
+ *
+ */
 @Data
 public class StudentDTO implements Serializable {
 

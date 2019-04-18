@@ -21,6 +21,7 @@ import com.aust.first.repository.StudentRepository;
 import com.aust.first.service.StudentService;
 import com.aust.first.vo.StudentDTO;
 import com.aust.first.vo.StudentVo;
+import com.aust.first.vo.StudentVo2;
 
 @Service
 @Transactional
@@ -114,13 +115,65 @@ public class StudentServiceImpl implements StudentService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StudentVo> lianbiao3() {
-		String sql = "SELECT student.sname, a.grade FROM student LEFT JOIN( SELECT student.sid, SUM(score.grade) grade FROM student LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a ON student.sid = a.sid";
+		String sql = "SELECT student.sname as sname , a.grade as grade  "
+				+ "FROM student LEFT JOIN( SELECT student.sid, SUM(score.grade) grade "
+				+ "FROM student LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a "
+				+ "ON student.sid = a.sid";
 		StringBuilder sb = new StringBuilder();
 		sb.append(sql);
 		Query sqlQuery = entityManager.createNativeQuery(sb.toString());
-		return sqlQuery.getResultList();
+		System.out.println(sqlQuery);
+		List<StudentVo> list = sqlQuery.getResultList();
+		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Student> lianbiao3_1() {
+		String sql = "SELECT * from student";
+		StringBuilder sb = new StringBuilder();
+		sb.append(sql);
+		Query sqlQuery = entityManager.createNativeQuery(sb.toString(),Student.class);
+		List<Student> list = sqlQuery.getResultList();
+		return list;
+	}
+	
+	//还没调通呢！！！
+	@SuppressWarnings("unchecked")
+	public List<StudentVo2> lianbiao3_2() {
+		String sql = "SELECT student.sname as sname , a.grade as grade  "
+				+ "FROM student LEFT JOIN( SELECT student.sid, SUM(score.grade) grade "
+				+ "FROM student LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a "
+				+ "ON student.sid = a.sid";
+		StringBuilder sb = new StringBuilder();
+		sb.append(sql);
+		Query sqlQuery = entityManager.createNativeQuery(sb.toString(),"CustomerVoResult");
+		System.out.println(sqlQuery);
+		List<StudentVo2> list = sqlQuery.getResultList();
+		return list;
+	}
+	
+	@Override
+	public List<StudentVo> lianbiao3_3() {
+		String sql = "SELECT student.sname as sname , a.grade as grade  "
+				+ "FROM student LEFT JOIN( SELECT student.sid, SUM(score.grade) grade "
+				+ "FROM student LEFT JOIN score ON student.sid = score.sid GROUP BY student.sid) a "
+				+ "ON student.sid = a.sid";
+		StringBuilder sb = new StringBuilder();
+		sb.append(sql);
+		Query sqlQuery = entityManager.createNativeQuery(sb.toString());
+		@SuppressWarnings("unchecked")
+		List<Object[]> results = sqlQuery.getResultList();
+		List<StudentVo> svList = new ArrayList<>();
+		results.stream().forEach((record) -> {
+			StudentVo sv = new StudentVo();
+			sv.setSname(record[0]);
+			sv.setGrade(record[1]);
+			svList.add(sv);
+		});
+		return svList;
+	}
+	
 	@Override
 	public List<Student> lianbiao4() {
 
@@ -131,6 +184,10 @@ public class StudentServiceImpl implements StudentService {
 	public List<Student> findAll() {
 		return studentRepository.findAll();
 	}
+
+	
+
+	
 
 	
 

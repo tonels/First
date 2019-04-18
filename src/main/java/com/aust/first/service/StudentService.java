@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import com.aust.first.entity.Student;
 import com.aust.first.vo.StudentDTO;
 import com.aust.first.vo.StudentVo;
+import com.aust.first.vo.StudentVo2;
 
 public interface StudentService {
 
@@ -29,8 +30,13 @@ public interface StudentService {
 	List<StudentDTO> lianbiao2_1();
 	
 	List<StudentVo> lianbiao3();
+	List<Student> lianbiao3_1();
+	List<StudentVo2> lianbiao3_2();
+	List<StudentVo> lianbiao3_3();
 
 	List<Student> lianbiao4();
 
 	List<Student> findAll();
+
+	
 }

@@ -5,15 +5,8 @@ import lombok.Data;
 @Data
 public class StudentVo {
 
-	private String sname;
+	private Object sname;
 	
-	private Integer grade;
+	private Object grade;
 
-	public StudentVo(String sname, Integer grade) {
-		super();
-		this.sname = sname;
-		this.grade = grade;
-	}
-	
-	
 }

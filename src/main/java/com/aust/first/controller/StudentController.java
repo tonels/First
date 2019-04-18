@@ -22,6 +22,7 @@ import com.aust.first.util.ExcelUtil_1;
 import com.aust.first.util.ResultBean;
 import com.aust.first.util.StringUtil;
 import com.aust.first.vo.StudentDTO;
+import com.aust.first.vo.StudentDTO2;
 
 @RestController
 @RequestMapping("/student")
@@ -47,6 +48,23 @@ public class StudentController {
 			s.setTotalgrade(b);
 			listdto.add(s);
 		}
+		System.out.println(listdto);
+		return ResultBean.ok(listdto);
+	}
+	
+	@GetMapping("/lianbiao1_1")
+	public ResultBean lianbiao1_1() {
+		List<Object[]> list = studentService.lianbiao1();
+		List<StudentDTO2> listdto = new ArrayList<StudentDTO2>();
+		for (int i = 0; i < list.size(); i++) {
+			StudentDTO2 s = new StudentDTO2();
+			Object[] obj = list.get(i);
+			s.setSid(obj[0]);
+			s.setSname(obj[1]);
+			s.setTotalgrade(obj[2]);
+			listdto.add(s);
+		}
+		System.out.println(listdto);
 		return ResultBean.ok(listdto);
 	}
 
@@ -71,7 +89,25 @@ public class StudentController {
 	public ResultBean lianbiao3() {
 		return ResultBean.ok(studentService.lianbiao3());
 	}
+	
+//	使用sql返回entity
+	@GetMapping("/lianbiao3_1")
+	public ResultBean lianbiao3_1() {
+		return ResultBean.ok(studentService.lianbiao3_1());
+	}
 
+//	使用sql并返回自定义实体类VO，没有封装pojo
+	@GetMapping("/lianbiao3_2")
+	public ResultBean lianbiao3_2() {
+		return ResultBean.ok(studentService.lianbiao3_2());
+	}
+	
+//	使用sql，自定义返回
+	@GetMapping("/lianbiao3_3")
+	public ResultBean lianbiao3_3() {
+		return ResultBean.ok(studentService.lianbiao3_3());
+	}
+	
 //	使用sql连表查询，并返回POJO
 	@GetMapping("/lianbiao4")
 	public ResultBean lianbiao4() {

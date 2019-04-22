@@ -68,7 +68,7 @@ public class StudentController {
 		return ResultBean.ok(listdto);
 	}
 
-//	使用sql并返回自定义实体类DTO,并将结果封装成pojo
+//	使用sql并返回自定义实体类DTO,mapping 映射，并将结果封装成pojo
 	@GetMapping("/lianbiao2")
 	public ResultBean lianbiao2() {
 		List<StudentDTO> list = studentService.lianbiao2();
@@ -76,7 +76,8 @@ public class StudentController {
 		return ResultBean.ok(list);
 	}
 	
-//	使用sql并返回自定义实体类DTO,并将结果封装成pojo
+//	使用sql并返回自定义实体类DTO,并将结果封装成pojo,会报错，
+//	Could not locate appropriate constructor on class : mypackage.CourseCompletion
 	@GetMapping("/lianbiao2_1")
 	public ResultBean lianbiao2_1() {
 		List<StudentDTO> list = studentService.lianbiao2_1();

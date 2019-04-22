@@ -107,11 +107,32 @@ public class StudentServiceImpl implements StudentService {
 		return dtoList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<StudentDTO> lianbiao2_1() {
-		return null;
+		String sql = "SELECT\r\n" + 
+				"	student.sid,\r\n" + 
+				"	student.sname,\r\n" + 
+				"	a.totalgrade\r\n" + 
+				"FROM\r\n" + 
+				"	student\r\n" + 
+				"LEFT JOIN (\r\n" + 
+				"	SELECT\r\n" + 
+				"		student.sid,\r\n" + 
+				"		SUM(score.grade) totalgrade\r\n" + 
+				"	FROM\r\n" + 
+				"		student\r\n" + 
+				"	LEFT JOIN score ON student.sid = score.sid\r\n" + 
+				"	GROUP BY\r\n" + 
+				"		student.sid\r\n" + 
+				") a ON student.sid = a.sid";
+		StringBuilder sb = new StringBuilder();
+		sb.append(sql);
+		Query sqlQuery = entityManager.createNativeQuery(sb.toString(),"studentmapping");
+		System.out.println(sqlQuery);
+		List<StudentDTO> list = sqlQuery.getResultList();
+		return list;
 	}
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StudentVo> lianbiao3() {

@@ -11,13 +11,25 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 
+import com.aust.first.vo.StudentDTO;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+@SqlResultSetMappings({
+	@SqlResultSetMapping(
+			name="studentmapping",
+			classes = @ConstructorResult(
+                    targetClass = StudentDTO.class,
+                    columns = {
+                        @ColumnResult(name = "sid", type = Long.class),
+                        @ColumnResult(name = "sname"),
+                        @ColumnResult(name = "totalgrade",type= Integer.class)})),
+})
 @Entity
 @Table(name="student")
 @SqlResultSetMapping( //lianbiao3_2没调出来

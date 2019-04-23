@@ -38,5 +38,7 @@ public interface StudentService {
 
 	List<Student> findAll();
 
+	Student f1(long id);
+
 	
 }

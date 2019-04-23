@@ -31,6 +31,11 @@ public class StudentController {
 	@Autowired
 	private StudentService studentService;
 
+	// 根据ID查询，编写单元测试，样例
+	@GetMapping("/f1-id")
+	public ResultBean f1(long id){
+		return ResultBean.ok(studentService.f1(id));
+	}
 	/*
 	 * 本地查询，返回自定义pojo
 	 */

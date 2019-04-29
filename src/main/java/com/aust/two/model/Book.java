@@ -9,12 +9,14 @@ import javax.persistence.Column;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 import java.lang.Override;
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
 
 @Entity
+@Data
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,71 +35,5 @@ public class Book implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER) // 多对一的映射,@ManyToOne(fetch = FetchType.lazy)会报错
     private Author author;
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(final Long id) {
-        this.id = id;
-    }
-
-    public int getVersion() {
-        return this.version;
-    }
-
-    public void setVersion(final int version) {
-        this.version = version;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Author getAuthor() {
-        return this.author;
-    }
-
-    public void setAuthor(final Author author) {
-        this.author = author;
-    }
-
-    @Override
-    public String toString() {
-        String result = getClass().getSimpleName() + " ";
-        if (title != null && !title.trim().isEmpty()) {
-            result += "title: " + title;
-        }
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Book)) {
-            return false;
-        }
-        Book other = (Book) obj;
-        if (id != null) {
-            if (!id.equals(other.id)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
 
 }

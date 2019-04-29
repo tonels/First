@@ -5,10 +5,13 @@
  */
 package com.aust.two.value;
 
+import lombok.Data;
+
 /**
  *
  * @author Thorben
  */
+@Data
 public class BookValue {
 
     private Long id;
@@ -23,35 +26,4 @@ public class BookValue {
         this.authorName = authorName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public String getAuthorName() {
-        return authorName;
-    }
-
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
 }

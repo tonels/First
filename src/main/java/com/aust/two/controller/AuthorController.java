@@ -12,14 +12,14 @@ import com.aust.two.service.AuthorService;
 @RequestMapping("/author")
 public class AuthorController {
 
-	@Autowired
-	private AuthorService authorService;
-	
-	@GetMapping("/slc1")
-	public ResultBean slc1() {
-		return ResultBean.ok(authorService.findAll());
-	}
-	
-	
-	
+    @Autowired
+    private AuthorService authorService;
+
+    @GetMapping("/slc1")
+    public ResultBean slc1() {
+        return ResultBean.ok(authorService.findAll());
+    }
+
+
+
 }

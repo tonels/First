@@ -21,5 +21,14 @@ public class AuthorController {
     }
 
 
+    @GetMapping("/slc2")
+    public ResultBean slc2() {
+        return ResultBean.ok(authorService.findAll());
+    }
+
+    @GetMapping("/slc3")
+    public ResultBean slc3() {
+        return ResultBean.ok(authorService.findAll());
+    }
 
 }

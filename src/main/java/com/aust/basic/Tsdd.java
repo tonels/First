@@ -1,0 +1,8 @@
+package com.aust.basic;
+
+public class Tsdd {
+
+    public static void main(String[] args) {
+        System
+    }
+}

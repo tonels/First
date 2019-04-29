@@ -11,6 +11,12 @@ class Student{
 	public Student(){
 		System.out.println("student init……");
 	}
+
+
+
+
+
+
 	public void study(){
 		System.out.println("study hard……");
 	}

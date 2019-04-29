@@ -3,6 +3,6 @@ package com.aust.basic;
 public class Tsdd {
 
     public static void main(String[] args) {
-        System
+        System.out.print("GIT测试");
     }
 }

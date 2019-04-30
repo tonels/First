@@ -8,7 +8,7 @@ public class Tsdd {
         System.out.print("GIT测试");
         System.out.print("GIT测试");
         System.out.print("GIT测试");
-        System.out.print("GIT测试");
+        System.out.print("GIT房贷首付测试");
 
 
     }

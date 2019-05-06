@@ -2,7 +2,9 @@ package com.aust.first.controller;
 
 import java.util.List;
 
+import org.bridj.cpp.std.list;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +35,16 @@ import com.aust.first.util.ResultBeanUtil;
 			List<Teacher> list = teacherRepository.findAll();
 			list.forEach((as)->System.out.println(as));
 			return ResultBeanUtil.ok(list);
+		}
+
+		@DeleteMapping("/delete")
+		ResultBeanUtil delete(String ids){
+			String[] idarray = ids.split(",");
+			for (String id : idarray){
+				teacherRepository.deleteById(Integer.valueOf(id));
+
+			}
+			return ResultBeanUtil.ok();
 		}
 		
 		

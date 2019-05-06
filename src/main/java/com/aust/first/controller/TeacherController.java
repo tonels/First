@@ -1,17 +1,16 @@
 package com.aust.first.controller;
 
-import java.util.List;
-
-import org.bridj.cpp.std.list;
+import com.aust.first.entity.Teacher;
+import com.aust.first.repository.TeacherRepository;
+import com.aust.first.util.DesSecurity;
+import com.aust.first.util.ResultBeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.aust.first.entity.Teacher;
-import com.aust.first.repository.TeacherRepository;
-import com.aust.first.util.DesSecurity;
-import com.aust.first.util.ResultBeanUtil;
+
+import java.util.List;
 
 	@RestController
 	@RequestMapping("/teacher")

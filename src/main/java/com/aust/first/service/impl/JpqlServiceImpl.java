@@ -1,12 +1,15 @@
 package com.aust.first.service.impl;
 
+import com.aust.first.dao.StuDao;
 import com.aust.first.entity.Score;
 import com.aust.first.entity.Student;
 import com.aust.first.jpql.StuAndScore;
 import com.aust.first.repository.JpqlRepository;
 import com.aust.first.service.JpqlService;
 import com.aust.first.util.StringUtil;
+import com.aust.first.vo.StudentDTO;
 import com.google.common.collect.Lists;
+import org.hibernate.sql.JoinType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -30,6 +34,8 @@ public class JpqlServiceImpl implements JpqlService {
 
     @Autowired
     private JpqlRepository jpqlRepository;
+    @Resource
+    private StuDao stuDao;
 
     @Override
     public List<Student> s1() {
@@ -38,7 +44,7 @@ public class JpqlServiceImpl implements JpqlService {
 
     @Override
     public Page<Student> s1_1() {
-        return jpqlRepository.s1_1(PageRequest.of(0, 2, Sort.Direction.ASC,"age"));
+        return jpqlRepository.s1_1(PageRequest.of(0, 2, Sort.Direction.ASC, "age"));
     }
 
     @Override
@@ -60,7 +66,7 @@ public class JpqlServiceImpl implements JpqlService {
     public List<Student> s1_4(String ages) {
         String[] ageS = ages.split(",");
         List<Integer> list = new ArrayList<>();
-        for(String age:ageS){
+        for (String age : ageS) {
             list.add(Integer.valueOf(age));
         }
         return jpqlRepository.s1_4(list);
@@ -116,7 +122,7 @@ public class JpqlServiceImpl implements JpqlService {
 
     @Override
     public List<Student> s4() {         // 查全部的信息，没有组装条件
-        Specification<Student> specification = new Specification<Student>(){
+        Specification<Student> specification = new Specification<Student>() {
             @Override
             public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 ArrayList<Predicate> predicates = Lists.newArrayList();
@@ -128,13 +134,13 @@ public class JpqlServiceImpl implements JpqlService {
 
     @Override
     public List<Student> s4_1(String sex) {
-        Specification<Student> specification = new Specification<Student>(){
+        Specification<Student> specification = new Specification<Student>() {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
 
                 ArrayList<Predicate> predicates = Lists.newArrayList();
-                if(!StringUtil.isNullStr(sex)){
-                    predicates.add(cb.like(root.get("sex"),sex));
+                if (!StringUtil.isNullStr(sex)) {
+                    predicates.add(cb.like(root.get("sex"), sex));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -144,20 +150,22 @@ public class JpqlServiceImpl implements JpqlService {
 
     @Override
     public List<Student> s4_2() {
-        Specification<Student> specification = new Specification<Student>(){
+        Specification<Student> specification = new Specification<Student>() {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
                 ArrayList<Predicate> predicates = Lists.newArrayList();
-
                 Root<Score> root1 = query.from(Score.class);
-
-                query.where(cb.equal(root.get("sid"), root1.get("sid")));
                 Predicate p1 = cb.equal(root.get("sid"), root1.get("sid"));
                 predicates.add(p1);
-
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
         };
         return jpqlRepository.findAll(specification);
+        //select student0_.* from student student0_ cross join score score1_ where student0_.sid=score1_.sid
+    }
+
+    @Override
+    public List<StudentDTO> s5() {
+        return stuDao.queryVO();
     }
 }

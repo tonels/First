@@ -26,7 +26,7 @@ import com.aust.first.util.StringUtil;
 public class Stu2ServiceImpl implements Stu2Service {
 
 	@Autowired
-	private Stu2Repository stu2Repository; 
+	private Stu2Repository stu2Repository;
 	
 	@Override //添加一个学生
 	public Stu2 save(Stu2 stu2) {

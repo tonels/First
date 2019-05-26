@@ -2,6 +2,7 @@ package com.aust.first.service;
 
 import com.aust.first.entity.Student;
 import com.aust.first.jpql.StuAndScore;
+import com.aust.first.vo.StudentDTO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -37,6 +38,8 @@ public interface JpqlService {
     List<Student> s4_1(String sex);
 
     List<Student> s4_2();
+
+    List<StudentDTO> s5();
 
 //    List<SnameVo> s1_5();
 

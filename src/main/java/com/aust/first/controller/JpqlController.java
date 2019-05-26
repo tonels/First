@@ -108,4 +108,10 @@ public class JpqlController {
         return ResultBean.ok(jpqlService.s4_2());
     }
 
+    @GetMapping("/s5")
+    public ResultBean s5(){
+        return ResultBean.ok(jpqlService.s5());
+    }
+
+
 }

@@ -7,4 +7,9 @@ public class GitServiceImpl implements GitService {
     public String g1() {
         return "GIT hello";
     }
+
+    @Override
+    public String g2() {
+        return "git 2";
+    }
 }

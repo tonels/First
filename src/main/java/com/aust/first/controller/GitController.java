@@ -17,4 +17,8 @@ public class GitController {
         return gitService.g1();
     }
 
+    @GetMapping("/")
+    public String g2(){
+        return gitService.g2();
+    }
 }

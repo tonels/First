@@ -21,4 +21,9 @@ public class GitController {
     public String g2(){
         return gitService.g2();
     }
+
+    @GetMapping("/")
+    public String g33(){
+        return gitService.g33();
+    }
 }

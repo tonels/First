@@ -17,4 +17,9 @@ public class GitServiceImpl implements GitService {
     public String g33() {
         return null;
     }
+
+    @Override
+    public String g3() {
+        return "GIT";
+    }
 }

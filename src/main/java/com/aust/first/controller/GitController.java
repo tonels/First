@@ -26,4 +26,10 @@ public class GitController {
     public String g33(){
         return gitService.g33();
     }
+
+
+    @GetMapping("/")
+    public String g3(){
+        return gitService.g3();
+    }
 }

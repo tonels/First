@@ -12,4 +12,9 @@ public class GitServiceImpl implements GitService {
     public String g2() {
         return "git 2";
     }
+
+    @Override
+    public String g3() {
+        return "GIT";
+    }
 }

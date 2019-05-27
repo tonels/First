@@ -4,4 +4,6 @@ public interface GitService {
     String g1();
 
     String g2();
+
+    String g3();
 }

@@ -1,16 +1,22 @@
 package com.aust.first.controller;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import com.aust.first.entity.Teacher;
 import com.aust.first.repository.TeacherRepository;
 import com.aust.first.util.DesSecurity;
 import com.aust.first.util.ResultBeanUtil;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 	@RestController
@@ -29,16 +35,24 @@ import java.util.List;
 			}
 		return ResultBeanUtil.ok();
 		}
-
-		@GetMapping("/addBatch")
-		ResultBeanUtil addBatch(List<Teacher> list){
-			list.forEach((tc)-> System.out.println("批量添加成功"));
-			return ResultBeanUtil.ok();
-		}
 		
 		@GetMapping("/get")
 		ResultBeanUtil get(){
 			List<Teacher> list = teacherRepository.findAll();
+			list.forEach((as)->System.out.println(as));
+			return ResultBeanUtil.ok(list);
+		}
+
+		@GetMapping("/get_1")
+		ResultBeanUtil get1(){
+			Specification<Teacher> specification = new Specification<Teacher>() {
+				@Override
+				public Predicate toPredicate(Root root, CriteriaQuery query, CriteriaBuilder cb) {
+					ArrayList<Predicate> predicates = Lists.newArrayList();
+					return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+				}
+			};
+			List<Teacher> list = teacherRepository.findAll(specification);
 			list.forEach((as)->System.out.println(as));
 			return ResultBeanUtil.ok(list);
 		}

@@ -1,5 +1,6 @@
 package com.aust.first.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.aust.first.entity.Teacher;
 import com.aust.first.repository.TeacherRepository;
 import com.aust.first.util.DesSecurity;
@@ -27,6 +28,12 @@ import java.util.List;
 			teacherRepository.saveAndFlush(teacher);
 			}
 		return ResultBeanUtil.ok();
+		}
+
+		@GetMapping("/addBatch")
+		ResultBeanUtil addBatch(List<Teacher> list){
+			list.forEach((tc)-> System.out.println("批量添加成功"));
+			return ResultBeanUtil.ok();
 		}
 		
 		@GetMapping("/get")

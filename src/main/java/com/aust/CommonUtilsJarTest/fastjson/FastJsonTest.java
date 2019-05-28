@@ -1,15 +1,11 @@
 package com.aust.CommonUtilsJarTest.fastjson;  
   
   
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;  
+import com.alibaba.fastjson.TypeReference;
+
+import java.util.*;
   
 	/*写在前面，Json格式的数据，就是特殊的字符串
 	 * 转成Json后方便数据存取，只是普通字符串的话，

@@ -12,23 +12,23 @@ public class GitController {
     @Resource
     private GitService gitService;
 
-    @GetMapping("/")
+    @GetMapping("/1")
     public String g1(){
         return gitService.g1();
     }
 
-    @GetMapping("/")
+    @GetMapping("/a2")
     public String g2(){
         return gitService.g2();
     }
 
-    @GetMapping("/")
+    @GetMapping("/a3")
     public String g33(){
         return gitService.g33();
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/a4")
     public String g3(){
         return gitService.g3();
     }

@@ -1,12 +1,10 @@
 package com.aust.first.service;
 
-import java.util.List;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-
+import cn.hutool.db.PageResult;
 import com.aust.first.entity.Stu2;
-import com.aust.first.entity.Student;
+import org.springframework.data.domain.Page;
+
+import java.util.List;
 
 public interface Stu2Service {
 
@@ -38,5 +36,9 @@ public interface Stu2Service {
 
 	List<String> findListGroupByHobby1();
 
+	PageResult<Stu2> getAll2list(Integer page, Integer size);
 
+	PageResult<Stu2> getAll2list2(int page, int rows, String sord, String sidx);
+
+	Page<Stu2> getAll2list1_1(int page, int rows, String sord, String sidx);
 }

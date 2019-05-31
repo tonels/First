@@ -1,30 +1,19 @@
 package com.aust.first.controller;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.alibaba.fastjson.JSON;
 import com.aust.first.entity.Stu2;
-import com.aust.first.entity.Student;
 import com.aust.first.service.Stu2Service;
-import com.aust.first.util.JsonUtils;
 import com.aust.first.util.PageBean;
 import com.aust.first.util.ResultBean;
 import com.aust.first.util.ResultBeanUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/stu2")
@@ -87,6 +76,21 @@ public class Stu2Controller {
 	public ResultBean getAll() {
 		return ResultBean.ok(stu2Service.getAll());
 	}
+
+	@GetMapping("/getAll2list1") // List 转成 分页对象（分页显示）
+	public ResultBean getAll2list1(Integer page,Integer size) {
+		return ResultBean.ok(stu2Service.getAll2list(page,size));
+	}
+	@GetMapping("/getAll2list1_1") // List 转成 分页对象（分页显示）
+	public PageBean<Stu2> getAll2list1_1(int page, int rows, String sord, String sidx) {
+		Page<Stu2> pageable = stu2Service.getAll2list1_1(page, rows, sord, sidx);
+		return PageBean.ok(pageable.getTotalPages(), pageable.getTotalElements(), pageable.getContent());
+	}
+
+//	@GetMapping("/getAll2list2") // List 分页排序 显示（分页排序显示）
+//	public ResultBean getAll2list2(int page, int rows, String sord, String sidx) {
+//		return ResultBean.ok(stu2Service.getAll2list2(int page, int rows, String sord, String sidx));
+//	}
 
 	// 无条件查询全部，getAll,返回list,排序
 	@GetMapping("/getAllByListSort")

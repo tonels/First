@@ -1,7 +1,11 @@
 package com.aust.first.service.impl;
 
 import com.aust.first.service.GitService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class GitServiceImpl implements GitService {
     @Override
     public String g1() {

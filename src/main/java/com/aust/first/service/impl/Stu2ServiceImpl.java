@@ -1,25 +1,20 @@
 package com.aust.first.service.impl;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import cn.hutool.db.PageResult;
 import com.aust.first.config.StudentConstants;
 import com.aust.first.entity.Stu2;
 import com.aust.first.repository.Stu2Repository;
 import com.aust.first.service.Stu2Service;
 import com.aust.first.util.SimpleName;
 import com.aust.first.util.StringUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -122,6 +117,37 @@ public class Stu2ServiceImpl implements Stu2Service {
 //		List<String> list = new ArrayList<String>();
 		List<String> list2 = stu2Repository.findListGrouphobby1();
 		return list2;
+	}
+
+//	// List 转成 Page
+	@Override
+	public PageResult<Stu2> getAll2list(Integer page, Integer size) {
+		List<Stu2> list = stu2Repository.findAll();
+		if((page - 1) * size > list.size()){
+			return null;
+		}
+		List<Stu2> stu2s = list.subList((page - 1) * size, page * size );
+		PageResult<Stu2> pageResult = new PageResult<Stu2>(page,stu2s.size(), stu2s.size());
+		pageResult.addAll(stu2s);
+		return pageResult;
+	}
+
+	// 这个方法并没有用，返回的是所有的东西 ！！！
+	@Override
+	public Page<Stu2> getAll2list1_1(int page, int rows, String sord, String sidx) {
+		if (StringUtil.isNullStr(sidx)) {
+			sidx = "admissionTime";
+		}
+		List<Stu2> list = stu2Repository.findAll();
+		Pageable pageable = PageRequest.of(page - 1, rows, "asc".equals(sord) ? Direction.ASC : Direction.DESC, sidx);
+		Page<Stu2> page1 = new PageImpl<Stu2>(list,pageable,list.size());
+		return page1;
+	}
+
+	//	// List 转成 Page，自定义排序显示
+	@Override
+	public PageResult<Stu2> getAll2list2(int page, int rows, String sord, String sidx) {
+		return null;
 	}
 
 }

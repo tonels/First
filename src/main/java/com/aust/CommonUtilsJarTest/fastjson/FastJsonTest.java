@@ -28,8 +28,7 @@ public class FastJsonTest {
      * 通过fastjson把字符串转换成JSON数据 
      * TypeReference 
      */  
-	
-    public static void string2Json(){  
+    public static void string2Json(){
         StringBuffer buffer=new StringBuffer();  
         buffer.append("{");  
             buffer.append("\"age\":").append("27").append(",");  
@@ -42,8 +41,7 @@ public class FastJsonTest {
         String address=jobj.get("address").toString();  
         System.out.println(address);  
     }  
-      
-    /** 
+        /**
      * 通过fastjson把字符串转换成对象 
      * TypeReference 
      */  

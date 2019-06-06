@@ -62,7 +62,6 @@ import java.util.List;
 			String[] idarray = ids.split(",");
 			for (String id : idarray){
 				teacherRepository.deleteById(Integer.valueOf(id));
-
 			}
 			return ResultBeanUtil.ok();
 		}

@@ -1,15 +1,12 @@
 package com.aust.first.entity;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
+@Data
 @Table(name="course")
 public class Course implements Serializable{
 
@@ -44,51 +41,4 @@ public class Course implements Serializable{
 	@Column(name="period")
 	private Integer period;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getCid() {
-		return cid;
-	}
-
-	public void setCid(Long cid) {
-		this.cid = cid;
-	}
-
-	public String getCname() {
-		return cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-
-	public Integer getCredit() {
-		return credit;
-	}
-
-	public void setCredit(Integer credit) {
-		this.credit = credit;
-	}
-
-	public Integer getPeriod() {
-		return period;
-	}
-
-	public void setPeriod(Integer period) {
-		this.period = period;
-	}
-
-	@Override
-	public String toString() {
-		return "Course [id=" + id + ", cid=" + cid + ", cname=" + cname + ", credit=" + credit + ", period=" + period
-				+ "]";
-	}
-	
-	
 }

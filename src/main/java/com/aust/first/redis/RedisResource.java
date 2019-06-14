@@ -1,17 +1,14 @@
 package com.aust.first.redis;
 
-import java.util.concurrent.TimeUnit;
-
+import com.aust.first.entity.Person;
+import com.aust.first.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.redis.RedisProperties.Jedis;
-import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnection;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.aust.first.entity.Person;
-import com.aust.first.repository.PersonRepository;
+
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/ls")
@@ -39,8 +36,8 @@ public class RedisResource {
 	
 	@GetMapping("/person")
 	public void person(){
-		Person p = new Person("1","张","三","12","fight");
-		repo.save(p);
+		Person person = new Person().setId("1").setFirstname("张三").setLastname("四").setAge("12").setBobbies("fight");
+		repo.save(person);
 	}
 	
 	/*下面不能测试*/

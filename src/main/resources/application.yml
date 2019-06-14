@@ -1,7 +1,7 @@
 spring:
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/liangshuai?autoReconnect=true&useSSL=false
+        url: jdbc:mysql://192.168.1.140:3306/test_l?autoReconnect=true&useSSL=false
         username: root
         password: root
         hikari:
@@ -48,5 +48,7 @@ spring:
     #data:
         #solr:
             #host: http://118.25.104.54:8983/solr/techproducts
-         
-          
+
+
+server:
+    port: 1219

@@ -1,15 +1,12 @@
 package com.aust.first.entity;
 
+import lombok.Data;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Entity
+@Data
 @Table(name="score")
 public class Score implements Serializable {
 
@@ -34,35 +31,5 @@ public class Score implements Serializable {
 	/*成绩*/
 	@Column(name="grade")
 	private Integer grade;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Long getSid() {
-		return sid;
-	}
-	public void setSid(Long sid) {
-		this.sid = sid;
-	}
-	public Long getCid() {
-		return cid;
-	}
-	public void setCid(Long cid) {
-		this.cid = cid;
-	}
-	public Integer getGrade() {
-		return grade;
-	}
-	public void setGrade(Integer grade) {
-		this.grade = grade;
-	}
-	@Override
-	public String toString() {
-		return "Score [id=" + id + ", sid=" + sid + ", cid=" + cid + ", grade=" + grade + "]";
-	}
-	
 	
 }

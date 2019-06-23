@@ -22,7 +22,6 @@ spring:
             hibernate.hbm2ddl.auto: update
     redis:
         host: 192.168.1.140
-        #host: 118.25.104.54
         port: 6379
         password:
         timeout: 3000

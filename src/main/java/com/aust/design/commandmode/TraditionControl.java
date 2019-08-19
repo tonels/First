@@ -14,7 +14,6 @@ public class TraditionControl implements Control {
 
 	@Override
 	public void onButton(int slot) {
-		// TODO Auto-generated method stub
 		switch (slot) {
 		case 0:
 			light.On();
@@ -33,7 +32,6 @@ public class TraditionControl implements Control {
 
 	@Override
 	public void offButton(int slot) {
-		// TODO Auto-generated method stub
 		switch (slot) {
 		case 0:
 			light.Off();
@@ -52,8 +50,7 @@ public class TraditionControl implements Control {
 
 	@Override
 	public void undoButton() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	

@@ -66,7 +66,6 @@ public class StudentControllerTest {
 
     /**
      * 修改电视频道接口
-     * TODO 缺省图片
      * */
    /* @Test
     public void update() throws Exception {

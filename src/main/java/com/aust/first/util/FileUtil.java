@@ -1,22 +1,11 @@
 package com.aust.first.util;
 
-import java.awt.Image;
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.io.*;
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
@@ -24,11 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.imageio.ImageIO;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * 类说明: 文件操作类
@@ -70,13 +54,14 @@ public class FileUtil {
 			return -1;
 		}
 	}
-    
-    /**
-     * 文件拷贝
-     * @param src
-     * @param tar
-     */
-    public static void fileCopy(File srcFile, File tarFile) throws Exception{
+
+	/**
+	 * 文件拷贝
+	 * @param srcFile
+	 * @param tarFile
+	 * @throws Exception
+	 */
+	public static void fileCopy(File srcFile, File tarFile) throws Exception{
     	FileInputStream is = null;
     	FileOutputStream os = null;
     	try {
@@ -514,7 +499,6 @@ public class FileUtil {
 				try {
 					is.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					log.error("errorMsg:"+e.getMessage());
 				}
 			}
@@ -522,7 +506,6 @@ public class FileUtil {
 				try {
 					fos.close();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					log.error("errorMsg:"+e.getMessage());
 				}
 			}

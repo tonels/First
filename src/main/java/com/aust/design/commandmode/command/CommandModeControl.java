@@ -48,7 +48,6 @@ public class CommandModeControl implements Control{
 
 	@Override
 	public void undoButton() {
-		// TODO Auto-generated method stub
 		stack.pop().undo();
 	}
 

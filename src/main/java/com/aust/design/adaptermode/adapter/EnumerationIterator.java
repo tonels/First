@@ -14,19 +14,16 @@ public class EnumerationIterator implements Iterator<Object> {
 	
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
 		return enumeration.hasMoreElements();
 	}
 
 	@Override
 	public Object next() {
-		// TODO Auto-generated method stub
 		return enumeration.nextElement();
 	}
 
 	@Override
 	public void remove() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 

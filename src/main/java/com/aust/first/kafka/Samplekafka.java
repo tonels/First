@@ -1,13 +1,10 @@
-/*package com.aust.first.kafka;
+package com.aust.first.kafka;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import com.aust.first.entity.Student;
+import com.aust.first.repository.StudentRepository;
+import com.aust.first.util.ResultBeanUtil;
+import com.aust.first.util.StringUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.clients.producer.Producer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.aust.first.entity.Student;
-import com.aust.first.repository.StudentRepository;
-import com.aust.first.util.ResultBeanUtil;
-import com.aust.first.util.StringUtil;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/kafka")
@@ -35,7 +33,7 @@ public class Samplekafka {
 	@Autowired
 	private StudentRepository stuRepository;
 	
-	话题一
+//	话题一
 	@KafkaListener(id = "t1", topics = "here") 
 	public void listenT1(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value()); 
@@ -51,14 +49,14 @@ public class Samplekafka {
 		System.out.println("cr.value()"+cr.value());
 		} 
 	
-	话题二
+//	话题二
 	@KafkaListener(id = "t2", topics = "there") 
 	public void listenT2(ConsumerRecord<?, ?> cr) throws Exception { 
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value());
 		logger.info("there is logging.....",cr.getClass()+ "/l/n"+cr.topic());
 		}
 	
-	话题三
+//	话题三
 	@KafkaListener(id="t3",topics="student")
 	public void listenT3(ConsumerRecord<?, ?> cr,String id) throws Exception{
 		logger.info("{} - {} : {}", cr.topic(), cr.key(), cr.value());
@@ -99,7 +97,7 @@ public class Samplekafka {
 		map.put("key",key);
 		map.put("data",data);
 		
-		以下是Map的集中遍历方式
+//		以下是Map的集中遍历方式
 		//i = 1，方法1时.先遍历key,取出对应的V
 		switch(i){
 		case 1:
@@ -157,4 +155,3 @@ public class Samplekafka {
 	
 	
 
-*/

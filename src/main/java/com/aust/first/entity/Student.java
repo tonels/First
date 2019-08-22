@@ -69,6 +69,6 @@ public class Student implements Serializable {
 	@JsonDeserialize(using=LocalDateTimeDeserializer.class)
 	@JsonSerialize(using=LocalDateTimeSerializer.class)
 	@Column(name="birthday")
-	private transient LocalDateTime birthday; 
+	private /*transient*/ LocalDateTime birthday;
 
 }

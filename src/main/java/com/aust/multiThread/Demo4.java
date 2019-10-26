@@ -3,12 +3,8 @@ package com.aust.multiThread;
 public class Demo4 {
 	public static void main(String[] args) {
 		
-		Thread4_1 a = new Thread4_1("线程  ..1..");
-		Thread4_1 b = new Thread4_1("线程  ..2..");
-
-		
-//		a.run();
-//		b.run();
+		Thread4_1 a = new Thread4_1("线程  ..1..	");
+		Thread4_1 b = new Thread4_1("线程  ..2..	");
 		
 		a.start();
 		b.start();
@@ -25,10 +21,9 @@ class Thread4_1 extends Thread{
 
 	@Override
 	public void run() {
-		for (int i = 0; i < 1000; i++) {
-			System.out.println(name + "Tonels");
+		for (int i = 0; i < 100; i++) {
+			System.out.println(name);
 		}
-		System.out.println(name + "Tonels");
 	}
 }
 
